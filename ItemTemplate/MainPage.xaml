@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="ItemTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ItemTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <DataTemplate x:Key="flugzeugTemplate" x:DataType="local:Flugzeug">
+            <StackPanel Background="Green">
+                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Slider Minimum="{Binding BreiteMin}" Maximum="{Binding BreiteMax}" Value="{Binding Breite, Mode=TwoWay}"/>
+                <ComboBox ItemsSource="{Binding HerstellerWerte}" SelectedItem="{Binding HerstellerName, Mode=TwoWay}"/>
+                <Image Source="{Binding FotoUrl}" Width="100" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Page.DataContext>
+        <local:FlugzeugListModel />
+    </Page.DataContext>
+    <StackPanel>
+        <ListBox ItemTemplate="{StaticResource flugzeugTemplate}" ItemsSource="{Binding FlugzeugListe}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Background" Value="Fuchsia" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <ContentPresenter Margin="0 30 0 0" Content="{Binding FlugzeugListe[0]}" ContentTemplate="{StaticResource flugzeugTemplate}"  />
+    </StackPanel>
+</Page>

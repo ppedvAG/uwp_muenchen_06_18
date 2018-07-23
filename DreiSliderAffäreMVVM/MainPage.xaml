@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="DreiSliderAffäreMVVM.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreiSliderAffäreMVVM"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <local:SliderModel />
+    </Page.DataContext>
+    <StackPanel Margin="20">
+        <Slider GotFocus="Slider_GotFocus" Value="{Binding Path=Slider1,Mode=TwoWay}" />
+        <Slider GotFocus="Slider_GotFocus" Value="{Binding Path=Slider2,Mode=TwoWay}" />
+        <Slider GotFocus="Slider_GotFocus" Value="{Binding Path=Slider3,Mode=TwoWay}" />
+        <TextBox Width="100" Text="{x:Bind SliderWithFocus.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBlock>
+            Slider mit Fokus: <Bold><Run Text="{x:Bind SliderWithFocus.Value,Mode=OneWay}" /></Bold>!
+        </TextBlock>
+        <Button Command="{Binding BerechneSummeCommand}" HorizontalAlignment="Center" Margin="20">Berechne Summe</Button>
+    </StackPanel>
+</Page>

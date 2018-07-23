@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="Layouts.CanvasPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Layouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Canvas>
+        <!--Attached Property Canvas.Left: Wird nicht direkt in der Klasse gespeichert-->
+        <Rectangle PointerReleased="Rectangle_PointerReleased" Canvas.ZIndex="20" Canvas.Left="20" Height="50" Width="50" Fill="Chocolate" />
+        <Line Canvas.Left="50" Canvas.Top="50"  X1="0" X2="5" Y1="10" Y2="20" Stroke="#FF13151B" StrokeThickness="10" />
+        <Line Canvas.Left="50" Canvas.Top="20"  X1="0" X2="5" Y1="10" Y2="20" Stroke="#FF13151B" StrokeThickness="10" />
+        <StackPanel Background="Beige" Canvas.Left="80" Canvas.Top="40" Height="200" Width="200">
+            <Button>1</Button>
+            <Button>1</Button>
+        </StackPanel>
+    </Canvas>
+</Page>

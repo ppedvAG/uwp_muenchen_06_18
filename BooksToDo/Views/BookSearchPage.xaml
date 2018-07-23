@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="BooksToDo.Views.BookSearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mycontrols="using:BooksToDo.Controls"
+    xmlns:views="using:BooksToDo.Views"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea">
+        <Pivot
+            x:Name="PivotItems">
+            <PivotItem x:Uid="BookSearch_PivotItem1">
+                <StackPanel>
+                    <TextBox Text="{x:Bind ViewModel.BookName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="100" />
+                    <Button Command="{x:Bind ViewModel.SearchBookCommand,Mode=OneWay}">Suche</Button>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem x:Uid="BookSearch_PivotItem2">
+                <mycontrols:BookResultDisplay BookItemsSource="{x:Bind ViewModel.Books,Mode=OneWay}" />
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

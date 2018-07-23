@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="Navigation.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Navigation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="White">
+
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}" />
+            <Style TargetType="StackPanel">
+                <Setter Property="Background" Value="{ThemeResource AppBarBackgroundThemeBrush}" />
+            </Style>
+        </StackPanel.Resources>
+        <ListBox Background="Red" x:Name="personenListe" DoubleTapped="personenListe_DoubleTapped">
+            <ListBoxItem>Anna</ListBoxItem>
+            <ListBoxItem>Olaf</ListBoxItem>
+            <ListBoxItem>Uwe</ListBoxItem>
+        </ListBox>
+        <Button Style="{ThemeResource AccentButtonStyle}" Click="Button_Click">Bearbeiten</Button>
+    </StackPanel>
+</Page>

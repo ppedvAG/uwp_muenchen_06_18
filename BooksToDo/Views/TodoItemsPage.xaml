@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="BooksToDo.Views.TodoItemsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:model="using:BooksToDo.Models"
+    xmlns:views="using:BooksToDo.Views"
+    xmlns:service="using:TodoServices"
+    xmlns:helpers="using:BooksToDo.Helpers"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:mycontrols="using:BooksToDo.Controls"
+    x:Name="page"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <PopupThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
+    <Page.Resources>
+        <helpers:ColorToBrushConverter x:Key="colorToBrush" />
+        <helpers:DateTimeToString x:Key="dateToString" />
+
+        <DataTemplate x:Key="masterTemplate" x:DataType="service:TodoItem">
+            <StackPanel Background="{x:Bind CategoryColor,Mode=OneWay,Converter={StaticResource colorToBrush}}" MinWidth="500">
+                <TextBlock FontSize="20" Text="{x:Bind Title,Mode=OneWay}" FontWeight="ExtraBold" />
+                <TextBlock Text="{x:Bind ReminderDate,Mode=OneWay,Converter={StaticResource dateToString}}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="detailTemplate" x:DataType="service:TodoItem">
+            <StackPanel Margin="10">
+                <TextBox Margin="0 0 0 10" FontSize="20" Text="{x:Bind Path=Title,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="ExtraBold" />
+                <TextBox Margin="0 0 0 10" Text="{x:Bind Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Margin="0 0 0 10" IsChecked="{x:Bind Favorite,Mode=TwoWay}" Command="{Binding ElementName=page,Path=ViewModel.ToggleFavoriteCommand}"
+                          CommandParameter="True">Favorit</CheckBox>
+                <TextBlock Margin="0 0 0 10">Erinnerung:</TextBlock>
+                <mycontrols:DateTimePicker  Margin="0 0 0 10" Date="{x:Bind ReminderDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left">
+                    <!--"using:Microsoft.Xaml.Interactivity
+                    stammt aus Microsoft.Xaml.Behaviors.Uwp.Managed-->
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="DateChanged">
+                            <core:InvokeCommandAction Command="{Binding ElementName=page,Path=ViewModel.ToggleFavoriteCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </mycontrols:DateTimePicker>
+                <StackPanel Margin="0 0 0 10" Orientation="Horizontal">
+                    <TextBlock Margin="0 0 10 0">Farbe:</TextBlock>
+                    <ColorPicker Color="{x:Bind CategoryColor,Mode=TwoWay,Converter={StaticResource colorToBrush}}" />
+                </StackPanel>
+                <Image Source="{Binding ImageLink,Mode=TwoWay}" Width="100" Height="100"></Image>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="ContentArea">
+            <CommandBar HorizontalAlignment="Right">
+                <AppBarButton Icon="Add" Command="{x:Bind ViewModel.AddTodoCommand,Mode=OneWay}" />
+                <AppBarButton Icon="Delete" Command="{x:Bind ViewModel.DeleteTodoCommand,Mode=OneWay}" />
+               
+                <AppBarButton Icon="Previous" Command="{x:Bind ViewModel.PreviewTodoCommand,Mode=OneWay}" />
+                <AppBarButton Icon="Next" Command="{x:Bind ViewModel.NextTodoCommand,Mode=OneWay}" />
+            </CommandBar>
+            <controls:MasterDetailsView 
+            x:Name="MasterDetailsViewControl"
+            ItemsSource="{Binding ElementName=page,Path=ViewModel.TodoList,Mode=OneWay}"
+            ItemTemplate="{StaticResource masterTemplate}"
+            DetailsTemplate="{StaticResource detailTemplate}"
+            SelectedItem="{x:Bind Path=ViewModel.SelectedItem,Mode=TwoWay}"
+            ScrollViewer.VerticalScrollMode="Enabled"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            BorderBrush="Transparent" >
+                <!--"using:Microsoft.Xaml.Interactivity
+                stammt aus Microsoft.Xaml.Behaviors.Uwp.Managed-->
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{x:Bind ViewModel.SaveTodosCommand}"  />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+
+                <controls:MasterDetailsView.NoSelectionContent>
+                    <StackPanel>
+                        <TextBlock Text="{x:Bind ViewModel.NoSelectionText,Mode=TwoWay}" />
+                        <ProgressBar x:Name="progressBar1" IsIndeterminate="True" Visibility="Visible" />
+                    </StackPanel>
+                </controls:MasterDetailsView.NoSelectionContent>
+            </controls:MasterDetailsView>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

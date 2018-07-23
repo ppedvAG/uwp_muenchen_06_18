@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="Layouts.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Layouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Pivot>
+            <PivotItem Header="StackPanel">
+                <Frame SourcePageType="local:StackPanelPage" />
+            </PivotItem>
+            <PivotItem Header="Canvas">
+                <Frame SourcePageType="local:CanvasPage" />
+            </PivotItem>
+            <PivotItem Header="Grid">
+                <Frame SourcePageType="local:GridPage" />
+            </PivotItem>
+            <PivotItem Header="RelativePanel">
+                <Frame SourcePageType="local:RelativePanelPage" />
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

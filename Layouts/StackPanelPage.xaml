@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Layouts.StackPanelPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Layouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}" />
+    </Page.Resources>
+    <StackPanel Margin="20" Orientation="Vertical" Background="Yellow">
+        <Button Canvas.Left="20">Button 1</Button>
+        <Slider></Slider>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel Height="100" HorizontalAlignment="Center" Orientation="Horizontal" Background="Blue" Padding="20">
+                <Button VerticalAlignment="Stretch" Margin="0 0 10 0" Background="Silver">
+                    <StackPanel Orientation="Horizontal" Background="Red">
+                        <SymbolIcon Symbol="Dislike" />
+                        <TextBlock>Button1</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button VerticalAlignment="Bottom" Margin="0 0 10 0" Background="Silver">Button2</Button>
+                <Button VerticalAlignment="Stretch" Margin="0 0 10 0" Background="Silver">Button3</Button>
+                <Button Margin="0 0 10 0">Button3</Button>
+                <Button Margin="0 0 10 0">Button3</Button>
+                <Button Margin="0 0 10 0" Background="Silver">Button3</Button>
+                <Button Margin="0 0 10 0" Background="Silver">Button3</Button>
+                <Button Margin="0 0 10 0" Background="Silver">Button3</Button>
+            </StackPanel>
+        </ScrollViewer>
+    </StackPanel>
+</Page>

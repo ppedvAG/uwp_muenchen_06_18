@@ -1,0 +1,7 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ResourcenUndStyles">
+    <x:String x:Key="changeLanguage">Sprache wechseln</x:String>
+    <x:String x:Key="changeStyle">Style wechseln</x:String>
+</ResourceDictionary>
